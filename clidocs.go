@@ -3,12 +3,14 @@ package main
 import (
   "fmt"
   "os"
+  "encoding/json"
 
   "github.com/urfave/cli"
 )
 
 type Response struct {
-  Resp string
+  Keyword string
+  ArgList string
 }
 
 func main() {
@@ -28,8 +30,12 @@ func main() {
       //query = c.Args().Get(0)
     }
     if c.String("lang") == "python" {
-      response := new(Response)
-      res := getJSON("", response)
+      var res Response
+      b := getJSON("")
+      err := json.Unmarshal(b, &res)
+      if (err != nil) {
+        // deal with error
+      }
       fmt.Println(res)
     } else {
       //fmt.Println("Hello", name)
