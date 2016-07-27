@@ -6,8 +6,11 @@ import (
   "io/ioutil"
 )
 
+// Base URL for API
+const BaseURL string = "http://localhost:8080/"
+
 func getJSON(url string) []byte {
-  resp, err := http.Get("http://localhost:8080")
+  resp, err := http.Get(BaseURL + url)
   if err != nil {
     // Deal with error
   }
