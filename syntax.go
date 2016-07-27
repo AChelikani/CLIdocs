@@ -2,15 +2,20 @@ package main
 
 import (
   "net/http"
-  "encoding/json"
+  //"log"
+  "io/ioutil"
 )
 
-func getJSON(url string, target interface{}) error {
-  resp, error := http.Get("http://jservice.io/api/random")
-  if error != nil {
+func getJSON(url string) []byte {
+  resp, err := http.Get("http://localhost:8080")
+  if err != nil {
+    // Deal with error
+  }
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
     // Deal with error
   }
   defer resp.Body.Close()
 
-  return json.NewDecoder(resp.Body).Decode(target)
+  return []byte(body)
 }
